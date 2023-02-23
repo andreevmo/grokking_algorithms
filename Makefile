@@ -9,3 +9,6 @@ test:
 
 report:
 	./gradlew jacocoTestReport
+
+build:
+	./gradlew build
