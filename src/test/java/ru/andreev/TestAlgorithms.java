@@ -37,4 +37,13 @@ public class TestAlgorithms {
 
         Assertions.assertEquals(compareResult, numbers);
     }
+
+    @Test
+    void testFactorial() {
+        int factorial5 = Algorithm.factorial(5);
+        int factorial3 = Algorithm.factorial(3);
+
+        Assertions.assertEquals(120, factorial5);
+        Assertions.assertEquals(6, factorial3);
+    }
 }
