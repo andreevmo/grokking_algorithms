@@ -10,13 +10,20 @@ public class TestAlgorithms {
 
     @Test
     void testBinarySearch() {
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        List<Integer> numbers1 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        List<Integer> numbers2 = List.of(4, 5, 6, 7, 8, 9, 10, 11, 12);
 
-        Integer result1 = Algorithm.binarySearch(numbers, 11);
+        Integer result1 = Algorithm.binarySearch(numbers1, 11);
         Assertions.assertNull(result1);
 
-        Integer result2 = Algorithm.binarySearch(numbers, 3);
+        Integer result2 = Algorithm.binarySearch(numbers1, 3);
         Assertions.assertEquals(2, result2);
+
+        Integer result3 = Algorithm.binarySearch(numbers2, 2);
+        Assertions.assertNull(result3);
+
+        Integer result4 = Algorithm.binarySearch(numbers2, 11);
+        Assertions.assertEquals(7, result4);
     }
 
     @Test

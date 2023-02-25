@@ -15,13 +15,11 @@ public class Algorithm {
 
             if (numbers.get(index).equals(elementForSearch)) {
                 return index;
-            } else if (elementForSearch > index) {
-
+            } else if (elementForSearch > numbers.get(index)) {
                 low = index + 1;
             } else {
                 high = index - 1;
             }
-
         }
 
         return null;
