@@ -87,11 +87,7 @@ public class Algorithm {
     }
 
     public static Integer findGreatestNum(List<Integer> numbers) {
-        if (numbers.size() == 0) {
-            return null;
-        } else if (numbers.size() == 1) {
-            return numbers.get(0);
-        } else {
+        if (numbers.size() > 1) {
             List<Integer> list = new ArrayList<>(numbers);
             if (list.get(0) > list.get(1)) {
                 list.remove(1);
@@ -100,30 +96,33 @@ public class Algorithm {
             }
             return findGreatestNum(list);
         }
+        return numbers.size() == 0 ? null : numbers.get(0);
     }
 
     public static List<Integer> quickSort(List<Integer> list) {
-        if (list.size() < 2) {
-            return list;
+        if (list.size() > 1) {
+            int index = (int) (Math.random() * list.size());
+            Integer pivot = list.get(index);
+            list.remove(index);
+            List<Integer> less = new ArrayList<>();
+            List<Integer> greater = new ArrayList<>();
+            divideBy(list, less, greater, pivot);
+            List<Integer> result = new ArrayList<>(quickSort(less));
+            result.add(pivot);
+            result.addAll(quickSort(greater));
+            return result;
         }
+        return list;
+    }
 
-        int index = (int) (Math.random() * list.size());
-        Integer pivot = list.get(index);
-        list.remove(index);
-        List<Integer> less = new ArrayList<>();
-        List<Integer> greater = new ArrayList<>();
-        for (Integer n : list) {
+    private static void divideBy(List<Integer> main, List<Integer> less, List<Integer> greater, Integer pivot) {
+        for (Integer n : main) {
             if (n > pivot) {
                 greater.add(n);
             } else {
                 less.add(n);
             }
         }
-
-        List<Integer> result = new ArrayList<>(quickSort(less));
-        result.add(pivot);
-        result.addAll(quickSort(greater));
-        return result;
     }
 
     public static Node searchInWidth(Node head, String missingElement) {
