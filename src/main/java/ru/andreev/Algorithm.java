@@ -1,7 +1,11 @@
 package ru.andreev;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Algorithm {
 
@@ -120,5 +124,24 @@ public class Algorithm {
         result.add(pivot);
         result.addAll(quickSort(greater));
         return result;
+    }
+
+    public static Node searchInWidth(Node head, String missingElement) {
+        Deque<Node> nodes = new ArrayDeque<>(head.getFriends());
+        Set<Node> checked = new HashSet<>();
+        checked.add(head);
+
+        while (!nodes.isEmpty()) {
+            Node checkNode = nodes.pop();
+            if (!checked.contains(checkNode)) {
+                if (checkNode.getName().equals(missingElement)) {
+                    return checkNode;
+                }
+                nodes.addAll(checkNode.getFriends());
+                checked.add(checkNode);
+            }
+        }
+
+        return null;
     }
 }

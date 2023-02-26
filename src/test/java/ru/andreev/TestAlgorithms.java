@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class TestAlgorithms {
 
@@ -122,5 +123,31 @@ public class TestAlgorithms {
         List<Integer> sortList3 = Algorithm.quickSort(list3);
 
         Assertions.assertEquals(list3, sortList3);
+    }
+
+    @Test
+    void searchInWidth() {
+        Node max = new Node("Max");
+        Node alice = new Node("Alice");
+        Node bob = new Node("Bob");
+        Node claire = new Node("Claire");
+        Node anuj = new Node("Anuj");
+        Node peggy = new Node("Peggy");
+        Node thom = new Node("Thom");
+        Node jonny = new Node("Jonny");
+        Node ivan = new Node("Ivan");
+        Node harry = new Node("Harry");
+
+        max.setFriends(Set.of(alice, bob, claire));
+        bob.setFriends(Set.of(anuj, peggy, max));
+        alice.setFriends(Set.of(peggy));
+        claire.setFriends(Set.of(thom, jonny));
+        jonny.setFriends(Set.of(ivan, harry));
+
+        Node node1 =  Algorithm.searchInWidth(max, "Ivan");
+        Assertions.assertEquals(ivan, node1);
+
+        Node node2 =  Algorithm.searchInWidth(max, "Christian");
+        Assertions.assertNull(node2);
     }
 }
